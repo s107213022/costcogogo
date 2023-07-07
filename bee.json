@@ -1,0 +1,10 @@
+{
+    "envs": [
+      "ORM_DRIVER=mysql",
+      "ORM_SOURCE=root:1qaz2wsx@/costcogogo?charset=utf8"
+    ],
+    "database": {
+      "driver": "mysql",
+      "conn": "root:1qaz2wsx@/costcogogo?charset=utf8"
+    }
+  }
