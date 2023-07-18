@@ -1,13 +1,13 @@
 package main
 
 import (
+	"costcogogo/models"
 	_ "costcogogo/routers"
 	"fmt"
 	"os"
 
-	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	_ "github.com/go-sql-driver/mysql" // import your required driver
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var DBARGS = struct {
@@ -33,9 +33,15 @@ func init() {
 	}
 
 	// set default database
-	orm.RegisterDataBase("default", DBARGS.Driver, DBARGS.Source, 30)
+	orm.RegisterDataBase("default", "mysql", "root:1qaz2wsx@tcp(127.0.0.1)/costcogogo?charset=utf8", 30)
 }
 
 func main() {
-	beego.Run()
+	userNotAdded := models.User{Name: "John Doe", Account: "123", Password: "456"}
+	userid, err := models.AddUser(&userNotAdded)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(userid)
+	//beego.Run()
 }
