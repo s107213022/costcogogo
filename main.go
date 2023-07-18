@@ -1,11 +1,11 @@
 package main
 
 import (
-	"costcogogo/models"
 	_ "costcogogo/routers"
 	"fmt"
 	"os"
 
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -37,11 +37,11 @@ func init() {
 }
 
 func main() {
-	userNotAdded := models.User{Name: "John Doe", Account: "123", Password: "456"}
-	userid, err := models.AddUser(&userNotAdded)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(userid)
-	//beego.Run()
+	// userNotAdded := models.User{Name: "John Doe", Account: "123", Password: "456"}
+	// userid, err := models.AddUser(&userNotAdded)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// fmt.Println(userid)
+	beego.Run()
 }
