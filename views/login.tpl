@@ -6,4 +6,5 @@
     <label for="password">Password:<input type="password" id="password" name="password"></label>
     <input type="submit" value="登入">
 </form>
+<a class="btn btn-primary" href="/create" role="button">創建帳號</a>
 {{end}}
