@@ -28,16 +28,23 @@ func AddUser(m *User) (id int64, err error) {
 	return
 }
 
+func CheckLogin(account, password string) (loggedIn bool, username string, err error) {
+	o := orm.NewOrm()
+	user := User{Account: account, Password: password}
+	err = o.Read(&user, "Account", "Password")
+	if err == nil {
+		loggedIn = true
+		username = user.Name
+		return loggedIn, username, nil
+	}
+	if err == orm.ErrNoRows {
+		return false, "", nil
+	}
+	return false, "", err
+}
+
 // GetUserById retrieves User by Id. Returns error if
 // Id doesn't exist
-func GetUserById(id int64) (v *User, err error) {
-	o := orm.NewOrm()
-	v = &User{Id: id}
-	if err = o.QueryTable(new(User)).Filter("Id", id).RelatedSel().One(v); err == nil {
-		return v, nil
-	}
-	return nil, err
-}
 
 // GetAllUser retrieves all User matches certain condition. Returns empty list if
 // no records exist

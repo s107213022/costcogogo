@@ -1,6 +1,9 @@
 package controllers
 
 import (
+	"costcogogo/models"
+	"fmt"
+
 	"github.com/astaxie/beego"
 )
 
@@ -14,11 +17,19 @@ func (c *LoginController) Get() {
 }
 
 func (c *LoginController) Post() {
-	name := c.GetString("name")
+	account := c.GetString("account")
 	password := c.GetString("password")
-	if name == "maple" && password == "123" {
-		c.Ctx.WriteString("登入成功")
-	} else {
-		c.Ctx.WriteString("用户名或密码错误")
+	loggedIn, user, err := models.CheckLogin(account, password)
+	if err != nil {
+		panic(err)
 	}
+	fmt.Println(loggedIn)
+	fmt.Println(user)
+	c.Data["Title"] = "My Website"
+	c.TplName = "login.tpl"
+	// if account == "maple" && password == "123" {
+	// 	c.Ctx.WriteString("登入成功")
+	// } else {
+	// 	c.Ctx.WriteString("用户名或密码错误")
+	// }
 }
