@@ -23,6 +23,10 @@ func (c *LoginController) Post() {
 	if err != nil {
 		panic(err)
 	}
+	if loggedIn {
+		c.Redirect("/dashboard", 302)
+	}
+	c.SetSession("username", user)
 	fmt.Println(loggedIn)
 	fmt.Println(user)
 	c.Data["Title"] = "My Website"
