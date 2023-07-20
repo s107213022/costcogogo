@@ -10,8 +10,9 @@ type DashboardController struct {
 }
 
 func (c *DashboardController) Get() {
-	username := c.GetSession("username")
+	userID := c.GetSession("userID")
 	c.Data["Title"] = "My Website"
-	c.Data["name"] = username
+	// All ,err := models.GetAllOwelist()
+	c.Data["name"] = userID
 	c.TplName = "dashboard.tpl"
 }

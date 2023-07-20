@@ -5,53 +5,50 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/astaxie/beego/orm"
 )
 
-type User struct {
+type Owelist struct {
 	Id       int64  `orm:"auto"`
-	Name     string `orm:"size(128)"`
-	Account  string `orm:"size(128)"`
-	Password string `orm:"size(128)"`
+	Creditor *User  `orm:"rel(fk)"`
+	Items    string `orm:"size(128)"`
+	Unit     int64
+	Date     time.Time `orm:"type(datetime)"`
+	Finish   int64
+	Debtor   *User `orm:"rel(fk)"`
 }
 
 func init() {
-	orm.RegisterModel(new(User))
+	orm.RegisterModel(new(Owelist))
 }
 
-// AddUser insert a new User into database and returns
+// AddOwelist insert a new Owelist into database and returns
 // last inserted Id on success.
-func AddUser(m *User) (id int64, err error) {
+func AddOwelist(m *Owelist) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-func CheckLogin(account, password string) (loggedIn bool, userID int64, err error) {
+// GetOwelistById retrieves Owelist by Id. Returns error if
+// Id doesn't exist
+func GetOwelistById(id int64) (v *Owelist, err error) {
 	o := orm.NewOrm()
-	user := User{Account: account, Password: password}
-	err = o.Read(&user, "Account", "Password")
-	if err == nil {
-		loggedIn = true
-		userID = user.Id
-		return loggedIn, userID, nil
+	v = &Owelist{Id: id}
+	if err = o.QueryTable(new(Owelist)).Filter("Id", id).RelatedSel().One(v); err == nil {
+		return v, nil
 	}
-	if err == orm.ErrNoRows {
-		return false, 0, nil
-	}
-	return false, 0, err
+	return nil, err
 }
 
-// GetUserById retrieves User by Id. Returns error if
-// Id doesn't exist
-
-// GetAllUser retrieves all User matches certain condition. Returns empty list if
+// GetAllOwelist retrieves all Owelist matches certain condition. Returns empty list if
 // no records exist
-func GetAllUser(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllOwelist(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(User))
+	qs := o.QueryTable(new(Owelist))
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -97,7 +94,7 @@ func GetAllUser(query map[string]string, fields []string, sortby []string, order
 		}
 	}
 
-	var l []User
+	var l []Owelist
 	qs = qs.OrderBy(sortFields...).RelatedSel()
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -120,11 +117,11 @@ func GetAllUser(query map[string]string, fields []string, sortby []string, order
 	return nil, err
 }
 
-// UpdateUser updates User by Id and returns error if
+// UpdateOwelist updates Owelist by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateUserById(m *User) (err error) {
+func UpdateOwelistById(m *Owelist) (err error) {
 	o := orm.NewOrm()
-	v := User{Id: m.Id}
+	v := Owelist{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -135,15 +132,15 @@ func UpdateUserById(m *User) (err error) {
 	return
 }
 
-// DeleteUser deletes User by Id and returns error if
+// DeleteOwelist deletes Owelist by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteUser(id int64) (err error) {
+func DeleteOwelist(id int64) (err error) {
 	o := orm.NewOrm()
-	v := User{Id: id}
+	v := Owelist{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&User{Id: id}); err == nil {
+		if num, err = o.Delete(&Owelist{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

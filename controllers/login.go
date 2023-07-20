@@ -19,16 +19,16 @@ func (c *LoginController) Get() {
 func (c *LoginController) Post() {
 	account := c.GetString("account")
 	password := c.GetString("password")
-	loggedIn, user, err := models.CheckLogin(account, password)
+	loggedIn, userID, err := models.CheckLogin(account, password)
 	if err != nil {
 		panic(err)
 	}
 	if loggedIn {
+		c.SetSession("userID", userID)
 		c.Redirect("/dashboard", 302)
 	}
-	c.SetSession("username", user)
 	fmt.Println(loggedIn)
-	fmt.Println(user)
+	fmt.Println(userID)
 	c.Data["Title"] = "My Website"
 	c.TplName = "login.tpl"
 	// if account == "maple" && password == "123" {
