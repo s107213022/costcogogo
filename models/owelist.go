@@ -14,9 +14,10 @@ type Owelist struct {
 	Id       int64  `orm:"auto"`
 	Creditor *User  `orm:"rel(fk)"`
 	Items    string `orm:"size(128)"`
-	Unit     int64
+	Money    int
+	Unit     int
 	Date     time.Time `orm:"type(datetime)"`
-	Finish   int64
+	Finish   int
 	Debtor   *User `orm:"rel(fk)"`
 }
 
@@ -41,6 +42,24 @@ func GetOwelistById(id int64) (v *Owelist, err error) {
 		return v, nil
 	}
 	return nil, err
+}
+
+func GetOwelistByCreditorID(creditorID int64) (oweList []*Owelist, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable(new(Owelist))
+
+	// 過濾Creditor的ID
+	qs = qs.Filter("Creditor", creditorID)
+
+	// 載入相關的Creditor和Debtor模型以獲取它們的名稱
+	qs = qs.RelatedSel("Creditor", "Debtor")
+
+	// 獲取所有符合條件的Owelist記錄
+	_, err = qs.All(&oweList)
+	if err != nil {
+		return nil, err
+	}
+	return oweList, nil
 }
 
 // GetAllOwelist retrieves all Owelist matches certain condition. Returns empty list if

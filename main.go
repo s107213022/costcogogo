@@ -34,6 +34,7 @@ func init() {
 
 	// set default database
 	orm.RegisterDataBase("default", "mysql", "root:1qaz2wsx@tcp(127.0.0.1)/costcogogo?charset=utf8", 30)
+	orm.RunSyncdb("default", false, true)
 }
 
 func main() {
