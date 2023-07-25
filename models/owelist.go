@@ -27,7 +27,7 @@ func init() {
 
 // AddOwelist insert a new Owelist into database and returns
 // last inserted Id on success.
-func AddOwelist(m *Owelist) (id int64, err error) {
+func AddoweList(m *Owelist) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return

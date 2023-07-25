@@ -7,7 +7,7 @@ import (
 )
 
 type User struct {
-	Id       int64  `orm:"auto","pk"`
+	Id       int64  `orm:"auto"`
 	Name     string `orm:"size(128)"`
 	Account  string `orm:"size(128)"`
 	Password string `orm:"size(128)"`
@@ -79,4 +79,24 @@ func GetNameById(id int64) (name string, err error) {
 		return name, nil
 	}
 	return "", err
+}
+
+func GetUserById(id int64) (user *User, err error) {
+	o := orm.NewOrm()
+	user = &User{Id: id}
+	err = o.Read(user)
+	if err == nil {
+		return user, nil
+	}
+	return nil, err
+}
+
+func GetUserByName(name string) (user *User, err error) {
+	o := orm.NewOrm()
+	user = &User{Name: name}
+	err = o.Read(user, "Name")
+	if err == nil {
+		return user, nil
+	}
+	return nil, err
 }

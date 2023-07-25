@@ -22,6 +22,7 @@ func (c *DashboardController) Get() {
 	if err != nil {
 		panic(err)
 	}
+	c.SetSession("name", name)
 	owelist, err := models.GetOwelistByCreditorID(userID.(int64))
 	if err != nil {
 		panic(err)
@@ -47,7 +48,7 @@ func (c *DashboardController) Get() {
 		fmt.Println("Debtor Name:", ow.Debtor.Name)
 		fmt.Println("-------------")
 	}
-	// c.Data["Owelist"] = list
+	c.Data["Owelist"] = owelist
 	// All ,err := models.GetAllOwelist()
 	c.Data["name"] = name
 	c.TplName = "dashboard.tpl"
