@@ -10,7 +10,8 @@
         Money: {{ .Money }}
         Unit: {{ .Unit }}
         <!-- 以此類推，列出其他需要顯示的欄位 -->
+        <a class="btn btn-primary" href="/updateowe/{{.Id}}" role="button">修改</a>
     </div>
-    <a class="btn btn-primary" href="/newowe" role="button">新欠款</a>
     {{end}}
+    <a class="btn btn-primary" href="/newowe" role="button">新欠款</a>
 {{end}}
