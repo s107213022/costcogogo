@@ -69,3 +69,24 @@ func (c *UpdateoweController) Post() {
 
 	c.Redirect("/dashboard", 302)
 }
+
+func (c *UpdateoweController) ChangeStatus() {
+	idStr := c.Ctx.Input.Param(":id")
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+
+	owelist, err := models.GetOwelistById(id)
+	if err != nil {
+		c.Data["json"] = map[string]string{"status": "error", "message": "Owelist not found"}
+	} else {
+		// 將 Finish 狀態從 1 修改為 2
+		owelist.Finish = 2
+		err := models.UpdateOwelist(owelist)
+		if err != nil {
+			c.Data["json"] = map[string]string{"status": "error", "message": "Failed to update Owelist status"}
+		} else {
+			c.Data["json"] = map[string]string{"status": "success", "message": "Owelist status updated successfully"}
+		}
+	}
+
+	c.ServeJSON()
+}

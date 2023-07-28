@@ -12,5 +12,6 @@ func init() {
 	beego.Router("/dashboard", &controllers.DashboardController{})
 	beego.Router("/create", &controllers.CreateAccountController{})
 	beego.Router("/newowe", &controllers.NewoweController{})
-	beego.Router("/updateowe/:id/", &controllers.UpdateoweController{})
+	beego.Router("/updateowe/:id/", &controllers.UpdateoweController{}, "get:Get;post:Post")
+	beego.Router("/updateowe/:id/changestatus", &controllers.UpdateoweController{}, "post:ChangeStatus")
 }
