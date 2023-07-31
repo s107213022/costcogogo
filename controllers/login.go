@@ -25,15 +25,22 @@ func (c *LoginController) Post() {
 	}
 	if loggedIn {
 		c.SetSession("userID", userID)
+
+		// 檢查是否勾選 Remember password
+		rememberPassword := c.GetString("rememberPasswordCheck") == "on"
+		if rememberPassword {
+			// 如果勾選了 Remember password，將帳號資訊存入 Cookie 中，有效期 30 天
+			c.Ctx.SetCookie("account", account, 3600*24*30)
+		} else {
+			// 如果沒有勾選 Remember password，則刪除 Cookie 中的帳號資訊
+			c.Ctx.SetCookie("account", "", -1)
+		}
+
 		c.Redirect("/dashboard", 302)
 	}
+
 	fmt.Println(loggedIn)
 	fmt.Println(userID)
 	c.Data["Title"] = "My Website"
 	c.TplName = "login.tpl"
-	// if account == "maple" && password == "123" {
-	// 	c.Ctx.WriteString("登入成功")
-	// } else {
-	// 	c.Ctx.WriteString("用户名或密码错误")
-	// }
 }
