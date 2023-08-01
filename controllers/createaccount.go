@@ -27,6 +27,6 @@ func (c *CreateAccountController) Post() {
 		panic(err)
 	}
 	fmt.Println(userid)
-	c.Ctx.WriteString(`<script>alert("創建成功");</script>`)
+	// c.Ctx.WriteString(`<script>alert("創建成功");</script>`)
 	c.Redirect("/login", 302)
 }

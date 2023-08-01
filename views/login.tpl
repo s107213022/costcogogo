@@ -46,9 +46,9 @@
             <div class="row">
               <div class="col-md-9 col-lg-8 mx-auto">
                 <h3 class="login-heading mb-4">Welcome back!</h3>
-                    <form id="loginForm" method="post">
+                    <form method="post" action="">
                         <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="account" name="account" placeholder="Postcogogo">
+                        <input type="text" class="form-control" id="account" name="account" placeholder="costcogogo">
                         <label for="account">Account</label>
                         </div>
                         <div class="form-floating mb-3">
