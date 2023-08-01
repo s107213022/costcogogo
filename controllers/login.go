@@ -13,7 +13,7 @@ type LoginController struct {
 
 func (c *LoginController) Get() {
 	c.Data["Title"] = "My Website"
-	c.TplName = "login.tpl"
+	c.TplName = "signin.tpl"
 }
 
 func (c *LoginController) Post() {
