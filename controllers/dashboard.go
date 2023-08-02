@@ -14,7 +14,11 @@ type DashboardController struct {
 func (c *DashboardController) Get() {
 	userID := c.GetSession("userID")
 	c.Data["Title"] = "My Website"
-
+	// 如果session中没有userID，跳回登入
+	if userID == nil {
+		c.Redirect("/login", 302)
+		return
+	}
 	// id取name
 
 	name, err := models.GetNameById(userID.(int64))

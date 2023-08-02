@@ -1,3 +1,9 @@
+<style>
+  /* 在此加入 CSS 樣式表 */
+  #profile {
+    cursor: default; /* 設定滑鼠游標為預設游標 */
+  }
+</style>
 {{ template "base.tpl" . }}
 {{define "content"}}
     <!-- ======== Preloader =========== -->
@@ -103,7 +109,7 @@
             </a>
             <ul id="ddmenu_3" class="collapsed show dropdown-nav">
               <li>
-                <a href="signin.html" class="active"> Sign In </a>
+                <a href="/login" class="active"> Sign In </a>
               </li>
               <li>
                 <a href="signup.html"> Sign Up </a>
@@ -270,57 +276,21 @@
                   </ul>
                 </div>
                 <!-- message end -->
+                <!--  上方欄位 -->
                 <!-- profile start -->
                 <div class="profile-box ml-15">
-                  <button class="dropdown-toggle bg-transparent border-0" type="button" id="profile"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="bg-transparent border-0" id="profile">
                     <div class="profile-info">
-                      <div class="info">
-                        <div class="image">
-                          <img src="static/images/profile/profile-image.png" alt="" />
+                        <div class="info">
+                            <!-- <div class="image">
+                                <img src="static/images/profile/profile-image.png" alt="" />
+                            </div> -->
+                            <div>
+                                <h6 class="fw-500">尚未登入</h6>
+                            </div>
                         </div>
-                        <div>
-                          <h6 class="fw-500">Adam Joe</h6>
-                          <p>Admin</p>
-                        </div>
-                      </div>
                     </div>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
-                    <li>
-                      <div class="author-info flex items-center !p-1">
-                        <div class="image">
-                          <img src="static/images/profile/profile-image.png" alt="image">
-                        </div>
-                        <div class="content">
-                          <h4 class="text-sm">Adam Joe</h4>
-                          <a class="text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white text-xs"
-                            href="#">Email@gmail.com</a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                      <a href="#0">
-                        <i class="lni lni-user"></i> View Profile
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#0">
-                        <i class="lni lni-alarm"></i> Notifications
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
-                    </li>
-                    <li>
-                      <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                      <a href="#0"> <i class="lni lni-exit"></i> Sign Out </a>
-                    </li>
-                  </ul>
+                </button>
                 </div>
                 <!-- profile end -->
               </div>
@@ -449,7 +419,7 @@
                     </div>
                     <p class="text-sm text-medium text-dark text-center">
                       Don’t have any account yet?
-                      <a href="signup.html">Create an account</a>
+                      <a href="/create">Create an account</a>
                     </p>
                   </div>
                 </div>
@@ -493,7 +463,6 @@
     <!-- ======== main-wrapper end =========== -->
 
     <!-- ========= All Javascript files linkup ======== -->
-    <script src="static/js/bootstrap.bundle.min.js"></script>
     <script src="static/js/Chart.min.js"></script>
     <script src="static/js/dynamic-pie-chart.js"></script>
     <script src="static/js/moment.min.js"></script>
@@ -531,7 +500,7 @@
         }
         document.getElementById('password').value = '';
       });
-  
+
       
     </script> 
 {{end}}
