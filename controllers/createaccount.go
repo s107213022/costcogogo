@@ -14,7 +14,7 @@ type CreateAccountController struct {
 
 func (c *CreateAccountController) Get() {
 	c.Data["Title"] = "Create Your Account"
-	c.TplName = "createAccount.tpl"
+	c.TplName = "signup.tpl"
 }
 
 func (c *CreateAccountController) Post() {
@@ -27,6 +27,10 @@ func (c *CreateAccountController) Post() {
 		panic(err)
 	}
 	fmt.Println(userid)
-	// c.Ctx.WriteString(`<script>alert("創建成功");</script>`)
+
+	flash := beego.NewFlash()
+	flash.Notice("帳號新增成功")
+	flash.Store(&c.Controller) // 儲存 Flash 消息
+
 	c.Redirect("/login", 302)
 }

@@ -12,6 +12,11 @@ type LoginController struct {
 }
 
 func (c *LoginController) Get() {
+	flash := beego.ReadFromRequest(&c.Controller)
+	if n, ok := flash.Data["notice"]; ok {
+		// 將 Flash 消息傳遞給模板
+		c.Data["FlashMessage"] = n
+	}
 	c.Data["Title"] = "My Website"
 	c.TplName = "signin.tpl"
 }
