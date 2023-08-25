@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"costcogogo/models"
+	"fmt"
 
 	"github.com/astaxie/beego"
 )
@@ -21,17 +22,20 @@ func (c *DashboardController) Get() {
 	}
 	// id取name
 
-	name, err := models.GetNameById(userID.(int64))
+	user, err := models.GetUserById(userID.(int64))
 	if err != nil {
+		// 處理錯誤
 		panic(err)
 	}
-	c.SetSession("name", name)
+	fmt.Println(user.Name)
+	c.SetSession("name", user.Name)
 	owelist, err := models.GetOwelistByCreditorID(userID.(int64))
 	if err != nil {
 		panic(err)
 	}
 	c.Data["Owelist"] = owelist
 	// All ,err := models.GetAllOwelist()
-	c.Data["name"] = name
-	c.TplName = "dashboard.tpl"
+	c.Data["name"] = user.Name
+	c.Data["account"] = user.Account
+	c.TplName = "index.tpl"
 }
