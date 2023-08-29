@@ -15,4 +15,5 @@ func init() {
 	beego.Router("/newowe", &controllers.NewoweController{})
 	beego.Router("/updateowe/:id/", &controllers.UpdateoweController{}, "get:Get;post:Post")
 	beego.Router("/updateowe/:id/changestatus", &controllers.UpdateoweController{}, "post:ChangeStatus")
+	beego.Router("/updateowe/:id/delete", &controllers.UpdateoweController{}, "post:Delete")
 }

@@ -17,7 +17,7 @@ func (c *DashboardController) Get() {
 	c.Data["Title"] = "My Website"
 	// 如果session中没有userID，跳回登入
 	if userID == nil {
-		c.Redirect("/login", 302)
+		c.Redirect("/", 302)
 		return
 	}
 	// id取name
@@ -27,6 +27,7 @@ func (c *DashboardController) Get() {
 		// 處理錯誤
 		panic(err)
 	}
+
 	fmt.Println(user.Name)
 	c.SetSession("name", user.Name)
 	owelist, err := models.GetOwelistByCreditorID(userID.(int64))

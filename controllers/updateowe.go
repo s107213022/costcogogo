@@ -90,3 +90,18 @@ func (c *UpdateoweController) ChangeStatus() {
 
 	c.ServeJSON()
 }
+
+func (c *UpdateoweController) Delete() {
+	idStr := c.Ctx.Input.Param(":id")
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+	fmt.Println(id)
+	err := models.DeleteOwelist(id)
+	if err != nil {
+		// 處理錯誤，如：顯示錯誤消息或將錯誤記錄到日誌中
+		c.Data["json"] = map[string]string{"status": "error", "message": "Failed to delete Owelist"}
+	} else {
+		c.Data["json"] = map[string]string{"status": "success", "message": "Owelist deleted successfully"}
+	}
+
+	c.ServeJSON()
+}

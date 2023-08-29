@@ -3,6 +3,7 @@
 <head>
     <title>{{.Title}}</title>
     <!-- 加入Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="static/css/my.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="shortcut icon" href="static/images/favicon.svg" type="image/x-icon" />
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
@@ -10,6 +11,8 @@
     <link rel="stylesheet" href="static/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="static/css/fullcalendar.css" />
     <link rel="stylesheet" href="static/css/main.css" />
+    
+    
 </head>
 <body>
     <!-- 頁面內容區域 -->
