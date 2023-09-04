@@ -288,10 +288,10 @@
             </div>
             <!-- End Col -->
           </div>
-          <div class="row">
+          <div class="row"> 
             
             <!-- End Col -->
-            <div class="col-lg-7">
+            <div class="col-lg-6">
               <div class="card-style mb-30">
                   <div class="title d-flex flex-wrap align-items-center justify-content-between">
                       <div class="left">
@@ -391,19 +391,99 @@
                       <!-- End Table -->
                   </div>
               </div>
-          </div>
-          
-            <!-- 日曆 -->
-            <div class="col-lg-5">
-              <div class="card-style calendar-card mb-30">
-                <div id="calendar-mini"></div>
-              </div>
             </div>
-            <!-- End Col -->
+          <div class="col-lg-6">
+              <div class="card-style mb-30">
+                  <div class="title d-flex flex-wrap align-items-center justify-content-between">
+                      <div class="left">
+                          <h6 class="text-medium mb-30">Paylist</h6>
+                      </div>
+                      <div class="right">
+                          <div class="select-style-1">
+                              <div class="select-position select-sm">
+                                  <select class="light-bg">
+                                      <option value="">Today</option>
+                                      <option value="">Yesterday</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <!-- end select -->
+                      </div>
+                  </div>
+                  <!-- End Title -->
+                  <div class="table-responsive">
+                      <table class="table top-selling-table">
+                          <thead>
+                              <tr>
+                                  <th>
+                                      <h6 class="text-sm text-medium">Debtor</h6>
+                                  </th>
+                                  <th class="min-width">
+                                      <h6 class="text-sm text-medium">
+                                          Items <i class="lni lni-arrows-vertical"></i>
+                                      </h6>
+                                  </th>
+                                  <th class="min-width">
+                                      <h6 class="text-sm text-medium">
+                                          Money <i class="lni lni-arrows-vertical"></i>
+                                      </h6>
+                                  </th>
+                                  <th class="min-width">
+                                      <h6 class="text-sm text-medium">
+                                          Status <i class="lni lni-arrows-vertical"></i>
+                                      </h6>
+                                  </th>
+                                  <th>
+                                      <h6 class="text-sm text-medium text-end">
+                                          Actions <i class="lni lni-arrows-vertical"></i>
+                                      </h6>
+                                  </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {{ range .Paylist }}
+                              <tr>
+                                  <td>
+                                      <div class="product">
+                                          <p class="text-sm">{{ .Creditor.Name }}</p>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <p class="text-sm">{{ .Items }}</p> <!-- changed from .Item to .Items based on the model -->
+                                  </td>
+                                  <td>
+                                      <p class="text-sm">${{ .Money }}</p>
+                                  </td>
+                                  <td>
+                                      {{ if eq .Finish 0 }}
+                                      <span class="status-btn">未還錢</span>
+                                      {{ else if eq .Finish 1 }}
+                                      <span class="status-btn">待確認</span>
+                                      {{ else if eq .Finish 2 }}
+                                      <span class="status-btn">已還錢</span>
+                                      {{ end }}
+                                  </td>
+                                  <td>
+                                      <div class="action justify-content-end">
+                                        {{if eq .Finish 0}}
+                                        <button class="change-payover-btn" data-id="{{.Id}}" style="padding: 1px 2px; font-size: 5px; background-color: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 4px;">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                          </svg>
+                                      </button>
+                                          {{end}}
+                                         
+                                      </div>
+                                  </td>
+                              </tr>
+                              {{ end }}
+                          </tbody>
+                      </table>
+                      <!-- End Table -->
+                  </div>
+              </div>
           </div>
-          
-          <!-- End Row -->
-        </div>
+        </div>  
         <!-- end container -->
       </section>
       <!-- ========== section end ========== -->
@@ -432,7 +512,7 @@
                     // 處理伺服器返回的 JSON 資料
                     if (data.status === 'success') {
                         // 更改狀態成功，更新前端畫面
-                        alert('狀態更改成功！');
+                        alert('更改狀態成功！');
                         // 這裡你可以根據需要更新前端畫面或重新載入頁面
                         location.reload();
                     } else {
@@ -447,6 +527,36 @@
             });
         });
     });
+
+    $(document).ready(function () {
+        // 當按鈕被點擊時觸發 AJAX 請求
+        $('.change-payover-btn').click(function () {
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: '/updateowe/' + id + '/payover',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    // 處理伺服器返回的 JSON 資料
+                    if (data.status === 'success') {
+                        // 更改狀態成功，更新前端畫面
+                        alert('已修改完付款資訊，待欠款方確認！');
+                        // 這裡你可以根據需要更新前端畫面或重新載入頁面
+                        location.reload();
+                    } else {
+                        // 更改狀態失敗，顯示錯誤訊息
+                        alert('狀態更改失敗：' + data.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // 處理 AJAX 錯誤
+                    alert('發生錯誤：' + error);
+                }
+            });
+        });
+    });
+
 
     $(document).ready(function () {
         // 當按鈕被點擊時觸發 AJAX 請求

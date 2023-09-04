@@ -34,7 +34,12 @@ func (c *DashboardController) Get() {
 	if err != nil {
 		panic(err)
 	}
+	paylist, err := models.GetOwelistByDebtorID(userID.(int64))
+	if err != nil {
+		panic(err)
+	}
 	c.Data["Owelist"] = owelist
+	c.Data["Paylist"] = paylist
 	// All ,err := models.GetAllOwelist()
 	c.Data["name"] = user.Name
 	c.Data["account"] = user.Account

@@ -60,6 +60,24 @@ func GetOwelistByCreditorID(creditorID int64) (oweList []*Owelist, err error) {
 	return oweList, nil
 }
 
+func GetOwelistByDebtorID(debtorID int64) (paylist []*Owelist, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable(new(Owelist))
+
+	// 过滤 Debtor 的 ID
+	qs = qs.Filter("Debtor", debtorID)
+
+	// 载入相应的 Creditor 和 Debtor 模型以获取它们的名字
+	qs = qs.RelatedSel("Creditor", "Debtor")
+
+	// 获取所有符合条件的 Owelist 记录
+	_, err = qs.All(&paylist)
+	if err != nil {
+		return nil, err
+	}
+	return paylist, nil
+}
+
 func UpdateOwelist(owelist *Owelist) error {
 	o := orm.NewOrm()
 	_, err := o.Update(owelist)
