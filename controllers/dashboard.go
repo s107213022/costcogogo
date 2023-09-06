@@ -34,14 +34,43 @@ func (c *DashboardController) Get() {
 	if err != nil {
 		panic(err)
 	}
+	for _, ow := range owelist {
+		// 将 money 的值修改为 money * unit
+		ow.Money = ow.Money * ow.Unit
+	}
+	// 計算owelist 的money*unit的總和
+	owelistmoney := CalculateTotalAmount(owelist, 0)
+	owelistmoneyovernotconfirm := CalculateTotalAmount(owelist, 1)
+	fmt.Println(owelistmoney)
 	paylist, err := models.GetOwelistByDebtorID(userID.(int64))
 	if err != nil {
 		panic(err)
 	}
+	for _, pw := range paylist {
+		// 将 money 的值修改为 money * unit
+		pw.Money = pw.Money * pw.Unit
+	}
+	paylistmoney := CalculateTotalAmount(paylist, 0)
+	paylistmoneyovernotconfirm := CalculateTotalAmount(paylist, 1)
+
 	c.Data["Owelist"] = owelist
 	c.Data["Paylist"] = paylist
-	// All ,err := models.GetAllOwelist()
+	c.Data["OwelistMoney"] = owelistmoney
+	c.Data["OwelistMoneyOverNotConfirm"] = owelistmoneyovernotconfirm
+	c.Data["PaylistMoney"] = paylistmoney
+	c.Data["PaylistMoneyOverNotConfirm"] = paylistmoneyovernotconfirm
 	c.Data["name"] = user.Name
 	c.Data["account"] = user.Account
 	c.TplName = "index.tpl"
+}
+
+func CalculateTotalAmount(oweList []*models.Owelist, status int64) int {
+	totalAmount := 0
+	for _, list := range oweList {
+		// 计算 money * unit，并累加到 totalAmount
+		if int64(list.Finish) == status {
+			totalAmount += list.Money
+		}
+	}
+	return totalAmount
 }
