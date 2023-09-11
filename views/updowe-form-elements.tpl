@@ -15,7 +15,7 @@
     <aside class="sidebar-nav-wrapper">
       <div class="navbar-logo">
         <a href="index.html">
-          <img src="static/images/logo/logo.svg" alt="logo" />
+          <img src="/static/images/logo/logo.svg" alt="logo" />
         </a>
       </div>
       <nav class="sidebar-nav">
@@ -230,23 +230,16 @@
                   <form action="" method="post">
                       <div class="row">
                           <div class="col-md-6">
-                            <div class="select-style-1">
+                            <div class="input-style-1">
                                   <label for="debtor">欠款人:</label>
-                                  <div class="select-position">
-                                  <select class="form-control" id="debtor" name="debtor">
-                                    <option value="">請選擇欠款人</option>
-                                      {{ range .Users }}
-                                      <option value="{{ . }}">{{ . }}</option>
-                                      {{ end }}
-                                  </select>
-                                </div>
+                                  <input type="text" name="debtor" value="{{ .Owelist.Debtor.Name }}">
                               </div>
                               <!-- end input -->
                           </div>
                           <div class="col-md-6">
                               <div class="input-style-1">
                                   <label for="items">商品:</label>
-                                  <input type="text" class="form-control" id="items" name="items">
+                                  <input type="text" name="items" value="{{ .Owelist.Items }}">
                               </div>
                               <!-- end input -->
                           </div>
@@ -255,19 +248,19 @@
                           <div class="col-md-6">
                               <div class="input-style-1">
                                   <label for="money">價格:</label>
-                                  <input type="text" class="form-control" id="money" name="money">
+                                  <input type="text" name="money" value="{{ .Owelist.Money }}">
                               </div>
                               <!-- end input -->
                           </div>
                           <div class="col-md-6">
                               <div class="input-style-1">
                                   <label for="unit">數量:</label>
-                                  <input type="text" class="form-control" id="unit" name="unit">
+                                  <input type="text" name="unit" value="{{ .Owelist.Unit }}">
                               </div>
                               <!-- end input -->
                           </div>
                       </div>
-                      <input type="submit" class="btn btn-primary" value="Add New">
+                      <input type="submit" class="btn btn-primary" value="Change now">
                   </form>
                 </div>
                 

@@ -44,5 +44,6 @@ func main() {
 	// 	panic(err)
 	// }
 	// fmt.Println(userid)
+	beego.SetStaticPath("/static", "static")
 	beego.Run()
 }
