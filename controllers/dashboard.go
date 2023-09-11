@@ -14,6 +14,13 @@ type DashboardController struct {
 
 func (c *DashboardController) Get() {
 	userID := c.GetSession("userID")
+	// 收新的 Flash 消息
+	flash := beego.ReadFromRequest(&c.Controller)
+	if n, ok := flash.Data["notice"]; ok {
+		// 將 Flash 消息傳遞給模板
+		c.Data["FlashMessage"] = n
+	}
+
 	c.Data["Title"] = "My Website"
 	// 如果session中没有userID，跳回登入
 	if userID == nil {

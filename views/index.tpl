@@ -66,7 +66,7 @@
             </a>
             <ul id="ddmenu_2" class="collapse dropdown-nav">
               <li>
-                <a href="settings.html"> Settings </a>
+                <a href="/newowe"> Add new Owelist </a>
               </li>
               <li>
                 <a href="blank-page.html"> Blank Page </a>
@@ -122,6 +122,9 @@
 
     <!-- ======== main-wrapper start =========== -->
     <main class="main-wrapper">
+      {{if .FlashMessage}}
+          <div class="alert alert-success">{{.FlashMessage}}</div>
+        {{end}}
       <!-- ========== header start ========== -->
       <header class="header">
         <div class="container-fluid">

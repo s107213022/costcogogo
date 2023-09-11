@@ -100,3 +100,19 @@ func GetUserByName(name string) (user *User, err error) {
 	}
 	return nil, err
 }
+
+// GetUserExceptSelf 除了自己之外的所有人
+func GetNamesExceptSelf(selfID int64) (names []string, err error) {
+	o := orm.NewOrm()
+	var users []*User
+	_, err = o.QueryTable(new(User)).
+		Exclude("Id", selfID).
+		All(&users)
+	if err == nil {
+		for _, user := range users {
+			names = append(names, user.Name)
+		}
+		return names, nil
+	}
+	return nil, err
+}

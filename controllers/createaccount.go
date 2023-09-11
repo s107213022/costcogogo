@@ -32,5 +32,5 @@ func (c *CreateAccountController) Post() {
 	flash.Notice("帳號新增成功")
 	flash.Store(&c.Controller) // 儲存 Flash 消息
 
-	c.Redirect("/login", 302)
+	c.Redirect("/", 302)
 }

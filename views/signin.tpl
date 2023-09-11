@@ -6,9 +6,6 @@
 </style>
 {{ template "base.tpl" . }}
 {{define "content"}}
-{{if .FlashMessage}}
-<div class="alert alert-success">{{.FlashMessage}}</div>
-{{end}}
     <!-- ======== Preloader =========== -->
     <div id="preloader">
       <div class="spinner"></div>
@@ -79,6 +76,9 @@
 
     <!-- ======== main-wrapper start =========== -->
     <main class="main-wrapper">
+      {{if .FlashMessage}}
+          <div class="alert alert-success">{{.FlashMessage}}</div>
+        {{end}}
       <!-- ========== header start ========== -->
       <header class="header">
         <div class="container-fluid">
