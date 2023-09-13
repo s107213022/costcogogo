@@ -11,8 +11,8 @@
     <!-- ======== sidebar-nav start =========== -->
     <aside class="sidebar-nav-wrapper">
       <div class="navbar-logo">
-        <a href="index.html">
-          <img src="static/images/logo/logo.svg" alt="logo" />
+        <a href="/dashboard">
+          <img src="/static/images/logo/costcogogologo.jpg" alt="logo" />
         </a>
       </div>
       <nav class="sidebar-nav">
@@ -72,7 +72,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="invoice.html">
               <span class="icon">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,7 +82,7 @@
               </span>
               <span class="text">Invoice</span>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item nav-item-has-children">
             <a
               href="#0"
@@ -167,11 +167,11 @@
                               </div>
                           </div>
                       </li>
-                      <li><hr class="dropdown-divider"></li>
+                      <!-- <li><hr class="dropdown-divider"></li>
                       <li><a href="#0"><i class="lni lni-user"></i> View Profile</a></li>
                       <li><a href="#0"><i class="lni lni-alarm"></i> Notifications</a></li>
                       <li><a href="#0"><i class="lni lni-inbox"></i> Messages</a></li>
-                      <li><a href="#0"><i class="lni lni-cog"></i> Settings</a></li>
+                      <li><a href="#0"><i class="lni lni-cog"></i> Settings</a></li> -->
                       <li><hr class="dropdown-divider"></li>
                       <li><a href="/logout"><i class="lni lni-exit"></i> Sign Out</a></li>
                   </ul>

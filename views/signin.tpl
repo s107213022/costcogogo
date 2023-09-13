@@ -15,8 +15,8 @@
     <!-- ======== sidebar-nav start =========== -->
     <aside class="sidebar-nav-wrapper">
       <div class="navbar-logo">
-        <a href="index.html">
-          <img src="static/images/logo/logo.svg" alt="logo" />
+        <a href="/">
+          <img src="/static/images/logo/costcogogologo.jpg" alt="logo" />
         </a>
       </div>
       <nav class="sidebar-nav">
@@ -109,7 +109,7 @@
                                 <img src="static/images/profile/profile-image.png" alt="" />
                             </div> -->
                             <div>
-                                <h6 class="fw-500">尚未登入</h6>
+                                <h6 class="fw-500">Not Login</h6>
                             </div>
                         </div>
                     </div>
@@ -159,9 +159,9 @@
                 <div class="auth-cover">
                   <div class="title text-center">
                     <h1 class="text-primary mb-10">Welcome Back</h1>
-                    <p class="text-medium">
+                    <!-- <p class="text-medium">
                       Sign in to your Existing account to continue
-                    </p>
+                    </p> -->
                   </div>
                   <div class="cover-image">
                     <img src="static/images/auth/signin-image.svg" alt="" />
@@ -176,11 +176,10 @@
             <div class="col-lg-6">
               <div class="signin-wrapper">
                 <div class="form-wrapper">
-                  <h6 class="mb-15">Sign In Form</h6>
-                  <p class="text-sm mb-25">
-                    Start creating the best possible user experience for you
-                    customers.
-                  </p>
+                  <h4 class="mb-15">Login to Start</h4>
+                  <!-- <p class="text-sm mb-25">
+                    Login to Start
+                  </p> -->
                   <form method="post" action="">
                     <div class="row">
                       <div class="col-12">
@@ -224,7 +223,7 @@
                     <!-- end row -->
                   </form>
                   <div class="singin-option pt-40">
-                    <p class="text-sm text-medium text-center text-gray">
+                    <!-- <p class="text-sm text-medium text-center text-gray">
                       Easy Sign In With
                     </p>
                     <div class="button-group pt-40 pb-40 d-flex justify-content-center flex-wrap">
@@ -236,7 +235,7 @@
                         <i class="lni lni-google mr-10"></i>
                         Google
                       </button>
-                    </div>
+                    </div> -->
                     <p class="text-sm text-medium text-dark text-center">
                       Don’t have any account yet?
                       <a href="/create">Create an account</a>

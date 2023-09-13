@@ -9,8 +9,8 @@
     <!-- ======== sidebar-nav start =========== -->
     <aside class="sidebar-nav-wrapper">
       <div class="navbar-logo">
-        <a href="index.html">
-          <img src="static/images/logo/logo.svg" alt="logo" />
+        <a href="/">
+          <img src="/static/images/logo/costcogogologo.jpg" alt="logo" />
         </a>
       </div>
       <nav class="sidebar-nav">
@@ -100,7 +100,7 @@
                                 <img src="static/images/profile/profile-image.png" alt="" />
                             </div> -->
                             <div>
-                                <h6 class="fw-500">尚未登入</h6>
+                                <h6 class="fw-500">Not Login</h6>
                             </div>
                         </div>
                     </div>
@@ -149,18 +149,13 @@
               <div class="auth-cover-wrapper bg-primary-100">
                 <div class="auth-cover">
                   <div class="title text-center">
-                    <h1 class="text-primary mb-10">Get Started</h1>
-                    <p class="text-medium">
-                      Start creating the best possible user experience
-                      <br class="d-sm-block" />
-                      for you customers.
-                    </p>
+                    <h1 class="text-primary mb-10">Let's Get Start</h1>
                   </div>
                   <div class="cover-image">
-                    <img src="static/images/auth/signin-image.svg" alt="" />
+                    <img src="/static/images/auth/signin-image.svg" alt="" />
                   </div>
                   <div class="shape-image">
-                    <img src="static/images/auth/shape.svg" alt="" />
+                    <img src="/static/images/auth/shape.svg" alt="" />
                   </div>
                 </div>
               </div>
@@ -169,11 +164,11 @@
             <div class="col-lg-6">
               <div class="signup-wrapper">
                 <div class="form-wrapper">
-                  <h6 class="mb-15">Sign Up Form</h6>
-                  <p class="text-sm mb-25">
+                  <h4 class="mb-15">Create You Account</h4>
+                  <!-- <p class="text-sm mb-25">
                     Start creating the best possible user experience for you
                     customers.
-                  </p>
+                  </p> -->
                   <form action="" method="post" onsubmit="validatePassword(event);">
                     <div class="row">
                       <div class="col-12">
