@@ -271,8 +271,8 @@
                           </div>
                           <!-- end input -->
                         </div>
-                        <div class="row">
-                          <!-- 初始块 -->
+                        <div id="blocksContainer"></div>
+                        <!-- <div class="row">
                             <div class="col-md-6">
                               <div class="select-style-1">
                                 <label for="debtor">欠款人:</label>
@@ -291,13 +291,12 @@
                                 <label for="money">金額:</label>
                                 <input type="text" class="form-control" id="money" name="money">
                               </div>
-                              <!-- end input -->
                             </div>
-                          </div>
+                          </div> -->
                       </div>
                       <input type="submit" class="btn btn-primary mt-3" value="Add New">
                     </form>
-                    <button id="addBlockButton" class="btn btn-secondary mt-3">新增欠款人</button>
+                    <button id="addBlockButton"name="addBlockButton" class="btn btn-secondary mt-3">新增欠款人</button>
                   </div>
                 </div>
               </div>
@@ -401,6 +400,37 @@
           }
         });
       });
+
+      $(document).ready(function(){
+        let blockCounter = 1;
+        let usersOptions = JSON.parse('{{ jsonMarshal .Users }}').map(user => `<option value="${user}">${user}</option>`).join('');
+
+        $("#addBlockButton").click(function(){
+            blockCounter++;
+            var newBlock = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="select-style-1">
+                            <label for="debtor${blockCounter}">欠款人:</label>
+                            <div class="select-position">
+                                <select class="form-control" id="debtor${blockCounter}" name="debtor${blockCounter}">
+                                    <option value="">請選擇欠款人</option>
+                                    ${usersOptions}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-style-1">
+                            <label for="money${blockCounter}">金額:</label>
+                            <input type="text" class="form-control" id="money${blockCounter}" name="money${blockCounter}">
+                        </div>
+                    </div>
+                </div>
+            `;
+            $(newBlock).appendTo("#blocksContainer");
+        });
+    });
       </script>
     {{ end}}
     

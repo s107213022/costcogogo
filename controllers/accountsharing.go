@@ -2,6 +2,9 @@ package controllers
 
 import (
 	"costcogogo/models"
+	"encoding/json"
+	"fmt"
+	"html/template"
 
 	"github.com/astaxie/beego"
 )
@@ -9,6 +12,10 @@ import (
 // CreateAccountController operations for CreateAccount
 type AccountsharingController struct {
 	beego.Controller
+}
+
+func init() {
+	beego.AddFuncMap("jsonMarshal", jsonMarshal)
 }
 
 func (c *AccountsharingController) Get() {
@@ -34,8 +41,14 @@ func (c *AccountsharingController) Get() {
 	c.Data["Users"] = NotmeUsers
 	c.Data["name"] = user.Name
 	c.Data["account"] = user.Account
+	fmt.Printf("%#v\n", NotmeUsers)
 }
 
 func (c *AccountsharingController) Post() {
 
+}
+
+func jsonMarshal(v interface{}) template.JS {
+	a, _ := json.Marshal(v)
+	return template.JS(a)
 }
