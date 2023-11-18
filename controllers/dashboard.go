@@ -21,7 +21,7 @@ func (c *DashboardController) Get() {
 		c.Data["FlashMessage"] = n
 	}
 
-	c.Data["Title"] = "My Website"
+	c.Data["Title"] = "Dashboard - CostcoGoGo"
 	// 如果session中没有userID，跳回登入
 	if userID == nil {
 		c.Redirect("/", 302)

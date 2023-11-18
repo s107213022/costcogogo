@@ -17,7 +17,7 @@ func (c *LoginController) Get() {
 		// 將 Flash 消息傳遞給模板
 		c.Data["FlashMessage"] = n
 	}
-	c.Data["Title"] = "My Website"
+	c.Data["Title"] = "CostcoGoGo - Login"
 	c.TplName = "signin.tpl"
 }
 
