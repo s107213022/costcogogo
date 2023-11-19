@@ -70,9 +70,6 @@
               <li>
                 <a href="/newowe"> Add New Owelist </a>
               </li>
-              <li>
-                <a href="blank-page.html"> Blank Page </a>
-              </li>
             </ul>
           </li>
           <!-- <li class="nav-item">
