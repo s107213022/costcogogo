@@ -1,9 +1,12 @@
-FROM golang:1.20.5
+# Base image
+FROM golang
 
-RUN go Install github.com/astaxie/beego && go get github.com/beego/bee
-RUN go get github.com/astaxie/beego/orm
-RUN go get github.com/go-sql-driver/mysql
+WORKDIR D:\walt\project\costcogogo
+ENV GO111MODULE=on
+ENV GOPROXY="https://goproxy.io"
 
+# Install Beego and Bee
+RUN go get github.com/astaxie/beego && go get github.com/beego/bee && go get github.com/go-sql-driver/mysql && go get github.com/astaxie/beego/orm 
 EXPOSE 8080
-# Install server application
+
 CMD ["bee", "run"]
